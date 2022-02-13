@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useEffect, useState } from 'react';
+import Horloge from './components/horloge/horloge';
+import DateDuJour from './components/dateDuJour/dateDuJour';
 
 function App() {
+
+
+  const [displayHorloge, setDisplayHorloge] = useState(true);
+  const [displayDate, setDisplayDate] = useState(false);
+  console.log("display horloge : " + displayHorloge);
+  console.log("display date : " + displayDate);
+
+  /* Bouton pour afficher l'horloge */
+  const handleHorlogeDisplay = () => {
+    setDisplayHorloge(d => !d);
+    setDisplayDate(d => !d);
+  }
+
+  /* Bouton pour afficher la date du jour */
+  const handleDateDisplay = () => {
+    setDisplayDate(d => !d);
+    setDisplayHorloge(d => !d);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {displayHorloge && (
+        <>
+          <Horloge />
+          <button onClick={handleDateDisplay}>Voir le jour</button>
+        </>
+      )}
+      {displayDate && (
+        <>
+          <DateDuJour />
+          <button onClick={handleHorlogeDisplay}>Voir l'heure</button>
+        </>
+      )}
+      <footer>©LisonFerné | 2022</footer>
+
+
+
+
     </div>
   );
 }
